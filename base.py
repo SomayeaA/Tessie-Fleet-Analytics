@@ -3,13 +3,11 @@ from datetime import datetime
 from enum import Enum
 from typing import Optional
 
-
 class ChargingState(Enum):
     CHARGING = "Charging"
     DISCONNECTED = "Disconnected"
     STOPPED = "Stopped"
     COMPLETE = "Complete"
-
 
 @dataclass
 class BatteryHealth:
