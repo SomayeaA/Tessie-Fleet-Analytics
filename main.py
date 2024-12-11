@@ -5,6 +5,7 @@ from visualizer import FleetVisualizer
 from key import API_KEY
 
 def main():
+    """Main function to run the fleet analytics."""
     api = TessieAPIManager(API_KEY)
     fleet = FleetAnalytics()
 
