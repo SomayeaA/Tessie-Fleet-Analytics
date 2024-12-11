@@ -48,10 +48,6 @@ pip install -r requirements.txt
 3. Create a `key.py` file with your Tessie API credentials
 ```python
 API_KEY = "your_api_key_here"
-API_CONFIG = {
-    "cache_duration": 300,
-    "base_url": "https://api.tessie.com"
-}
 ```
 
 ## Usage
