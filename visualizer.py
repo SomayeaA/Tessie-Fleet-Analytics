@@ -3,10 +3,12 @@ from typing import List
 from vehicle import Vehicle
 
 class FleetVisualizer:
+    """Class for creating fleet data visualizations."""
     def __init__(self, vehicles: List[Vehicle]):
         self.vehicles = vehicles
 
     def create_dashboard(self, output_file: str = "dashboard.html"):
+        """Create an interactive dashboard of fleet metrics."""
         # Battery levels
         fig = go.Figure()
         for vehicle in self.vehicles:
@@ -44,6 +46,7 @@ class FleetVisualizer:
                 )
             )
         )
+
         # Lifetime Energy Usage
         fig_energy = go.Figure()
         for vehicle in self.vehicles:
