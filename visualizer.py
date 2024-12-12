@@ -20,4 +20,28 @@ class FleetVisualizer:
                 )
             )
         fig.update_layout(title="Vehicle Battery Levels")
+
+        # Vehicle locations
+        fig_map = go.Figure()
+        fig_map.add_trace(
+            go.Scattermapbox(
+                lat=[v.get_latest_metrics().latitude for v in self.vehicles],
+                lon=[v.get_latest_metrics().longitude for v in self.vehicles],
+                mode='markers+text',
+                marker=dict(size=12),
+                text=[v.display_name for v in self.vehicles],
+                name="Vehicle Locations"
+            )
+        )
+        fig_map.update_layout(
+            title="Vehicle Locations",
+            mapbox=dict(
+                style="carto-positron",
+                zoom=10,
+                center=dict(
+                    lat=sum(v.get_latest_metrics().latitude for v in self.vehicles) / len(self.vehicles),
+                    lon=sum(v.get_latest_metrics().longitude for v in self.vehicles) / len(self.vehicles)
+                )
+            )
+        )
         fig.write_html(output_file)
