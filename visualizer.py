@@ -44,4 +44,22 @@ class FleetVisualizer:
                 )
             )
         )
+        # Lifetime Energy Usage
+        fig_energy = go.Figure()
+        for vehicle in self.vehicles:
+            metrics = vehicle.get_latest_metrics()
+            if metrics.lifetime_energy_used is not None:
+                fig_energy.add_trace(
+                    go.Bar(
+                        name=vehicle.display_name,
+                        x=[vehicle.display_name],
+                        y=[metrics.lifetime_energy_used],
+                        text=[f"{metrics.lifetime_energy_used:,.0f} kWh"],
+                        textposition='auto',
+                    )
+                )
+        fig_energy.update_layout(
+            title="Lifetime Energy Usage",
+            yaxis_title="Energy Used (kWh)"
+        )
         fig.write_html(output_file)
