@@ -10,10 +10,10 @@ class FleetVisualizer:
     def create_dashboard(self, output_file: str = "dashboard.html"):
         """Create an interactive dashboard of fleet metrics."""
         # Battery levels
-        fig = go.Figure()
+        fig_battery = go.Figure()
         for vehicle in self.vehicles:
             metrics = vehicle.get_latest_metrics()
-            fig.add_trace(
+            fig_battery.add_trace(
                 go.Bar(
                     name=vehicle.display_name,
                     x=[vehicle.display_name],
@@ -21,7 +21,10 @@ class FleetVisualizer:
                     text=[f"{metrics.battery_level}%"]
                 )
             )
-        fig.update_layout(title="Vehicle Battery Levels")
+        fig_battery.update_layout(
+            title="Vehicle Battery Levels",
+            yaxis_title="Battery Level (%)"
+        )
 
         # Vehicle locations
         fig_map = go.Figure()
@@ -65,4 +68,65 @@ class FleetVisualizer:
             title="Lifetime Energy Usage",
             yaxis_title="Energy Used (kWh)"
         )
-        fig.write_html(output_file)
+
+        # Export to HTML
+        with open(output_file, 'w') as f:
+            f.write("""
+            <html>
+            <head>
+                <title>Tesla Fleet Dashboard</title>
+                <style>
+                    .dashboard {
+                        display: grid;
+                        grid-template-columns: 1fr 1fr;
+                        grid-gap: 20px;
+                        padding: 20px;
+                        max-width: 1400px;
+                        margin: 0 auto;
+                    }
+                    .plot {
+                        width: 100%;
+                        height: 500px;
+                        border: 1px solid #ddd;
+                        border-radius: 5px;
+                        padding: 10px;
+                    }
+                    .wide-plot {
+                        grid-column: 1 / -1;
+                        height: auto !important;
+                        min-height: 400px;
+                    }
+                    h1 {
+                        text-align: center;
+                        color: #333;
+                        padding: 20px;
+                    }
+                    .section-title {
+                        grid-column: 1 / -1;
+                        text-align: center;
+                        margin: 20px 0;
+                        color: #666;
+                    }
+                    footer {
+                        text-align: center;
+                        padding: 20px;
+                        background-color: #f1f1f1;
+                        color: #333;
+                    position: fixed;
+                    width: 100%;
+                    bottom: 0;
+                    }
+                </style>
+            </head>
+            <body>
+                <h1>Tesla Fleet Analytics Dashboard</h1>
+                <div class="dashboard">
+                    <div class="section-title"><h2>Current Status</h2></div>
+                    <div class="plot">
+            """)
+            f.write(fig_battery.to_html(full_html=False, include_plotlyjs='cdn'))
+            f.write('</div><div class="plot">')
+            f.write(fig_map.to_html(full_html=False, include_plotlyjs=False))
+            f.write('</div><div class="plot">')
+            f.write(fig_energy.to_html(full_html=False, include_plotlyjs=False))
+            f.write('</div></div><footer>Created by Group 7 - CIS3120</footer></body></html>')
