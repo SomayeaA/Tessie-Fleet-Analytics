@@ -69,6 +69,34 @@ class FleetVisualizer:
             yaxis_title="Energy Used (kWh)"
         )
 
+        # Battery Health Comparison
+        fig_health = go.Figure()
+        fig_health.add_trace(
+            go.Bar(
+                name="Health",
+                x=[v.display_name for v in self.vehicles],
+                y=[v.get_latest_metrics().battery_health.health_percent for v in self.vehicles],
+                text=[f"{v.get_latest_metrics().battery_health.health_percent}%" for v in self.vehicles],
+                textposition='auto',
+                marker_color='green'
+            )
+        )
+        fig_health.add_trace(
+            go.Bar(
+                name="Degradation",
+                x=[v.display_name for v in self.vehicles],
+                y=[v.get_latest_metrics().battery_health.degradation_percent for v in self.vehicles],
+                text=[f"{v.get_latest_metrics().battery_health.degradation_percent}%" for v in self.vehicles],
+                textposition='auto',
+                marker_color='red'
+            )
+        )
+        fig_health.update_layout(
+            title="Battery Health vs Degradation",
+            yaxis_title="Percentage",
+            barmode='group'
+        )
+
         # Export to HTML
         with open(output_file, 'w') as f:
             f.write("""
