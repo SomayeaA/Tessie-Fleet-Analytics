@@ -141,6 +141,35 @@ class FleetVisualizer:
             yaxis_title="Maximum Range (miles)"
         )
 
+        # Model Comparison Table
+        model_data = []
+        for vehicle in self.vehicles:
+            metrics = vehicle.get_latest_metrics()
+            health = metrics.battery_health
+            model_data.append([
+                vehicle.display_name,
+                metrics.model_type,
+                metrics.performance_package,
+                f"{metrics.odometer:,.0f}",
+                f"{health.health_percent:.1f}%",
+                f"{health.max_range:.0f}",
+                f"{health.capacity:.1f}"
+            ])
+
+        fig_models = go.Figure(data=[go.Table(
+            header=dict(
+                values=['Vehicle', 'Model', 'Performance', 'Odometer', 'Health', 'Max Range', 'Capacity'],
+                fill_color='paleturquoise',
+                align='left'
+            ),
+            cells=dict(
+                values=list(zip(*model_data)),
+                fill_color='lavender',
+                align='left'
+            )
+        )])
+        fig_models.update_layout(title="Vehicle Comparison")
+
         # Export to HTML
         with open(output_file, 'w') as f:
             f.write("""
