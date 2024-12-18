@@ -61,7 +61,6 @@ python main.py
 ### Current Status Section
 - Battery levels across fleet
 - Real-time vehicle locations
-- Current climate control status
 - Vehicle activity status
 
 ### Battery Analysis
@@ -80,7 +79,6 @@ python main.py
 - Battery level and range
 - Charging status
 - Location data
-- Climate control settings
 - Vehicle state information
 - Model specifications
 - Energy consumption metrics
