@@ -10,6 +10,7 @@ A Python-based analytics dashboard that leverages the Tessie API to track and an
 - Energy consumption analysis
 - Model specifications comparison
 - Interactive visualizations using Plotly
+- Energy Efficiency and Cost Analysis
 
 ## Project Structure
 ```
@@ -19,7 +20,7 @@ tesla_fleet/
 ├── fleet.py         # Fleet analytics implementation
 ├── tessie_api.py    # API communication handler
 ├── visualizer.py    # Data visualization module
-├── analysis.py      # Energy and Cost analyzer
+├── analysis.py      # Energy Efficiency and Cost analyzer
 ├── key.py           # API credentials (not included in repo)
 └── main.py          # Main application script
 ```
