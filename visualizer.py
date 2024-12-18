@@ -233,6 +233,7 @@ class FleetVisualizer:
             f.write('</div><div class="section-title"><h2>Battery Health Analysis</h2></div>')
             f.write('<div class="plot">')
             f.write(fig_health.to_html(full_html=False, include_plotlyjs=False))
+            f.write('</div><div class="plot">')
             f.write(fig_capacity.to_html(full_html=False, include_plotlyjs=False))
             f.write('</div><div class="plot">')
             f.write(fig_range.to_html(full_html=False, include_plotlyjs=False))
