@@ -3,6 +3,7 @@ from vehicle import Vehicle
 from fleet import FleetAnalytics
 from visualizer import FleetVisualizer
 from key import API_KEY
+from analysis import EnergyAndCostAnalyzer
 
 
 def main():
@@ -38,6 +39,10 @@ def main():
     # Create visualizations
     visualizer = FleetVisualizer(fleet.vehicles)
     visualizer.create_dashboard("dashboard.html")
+
+    # Analyze energy and cost metrics
+    analyzer = EnergyAndCostAnalyzer(fleet.vehicles)
+    analyzer.save_text_report()
 
 
 if __name__ == "__main__":
