@@ -157,4 +157,7 @@ class FleetVisualizer:
             f.write(fig_map.to_html(full_html=False, include_plotlyjs=False))
             f.write('</div><div class="plot">')
             f.write(fig_energy.to_html(full_html=False, include_plotlyjs=False))
+            f.write('</div><div class="section-title"><h2>Battery Health Analysis</h2></div>')
+            f.write('<div class="plot">')
+            f.write(fig_health.to_html(full_html=False, include_plotlyjs=False))
             f.write('</div></div><footer>Created by Group 7 - CIS3120</footer></body></html>')
