@@ -14,11 +14,12 @@ A Python-based analytics dashboard that leverages the Tessie API to track and an
 ## Project Structure
 ```
 tesla_fleet/
-├── base.py           # Core data structures and types
-├── vehicle.py        # Vehicle class implementation
-├── fleet.py          # Fleet analytics implementation
-├── tessie_api.py     # API communication handler
-├── visualizer.py     # Data visualization module
+├── base.py          # Core data structures and types
+├── vehicle.py       # Vehicle class implementation
+├── fleet.py         # Fleet analytics implementation
+├── tessie_api.py    # API communication handler
+├── visualizer.py    # Data visualization module
+├── analysis.py      # Energy and Cost analyzer
 ├── key.py           # API credentials (not included in repo)
 └── main.py          # Main application script
 ```
