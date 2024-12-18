@@ -236,4 +236,7 @@ class FleetVisualizer:
             f.write(fig_capacity.to_html(full_html=False, include_plotlyjs=False))
             f.write('</div><div class="plot">')
             f.write(fig_range.to_html(full_html=False, include_plotlyjs=False))
+            f.write('</div><div class="wide-plot">')
+            f.write(fig_models.to_html(full_html=False, include_plotlyjs=False))            
             f.write('</div></div><footer>Created by Group 7 - CIS3120</footer></body></html>')
+            
