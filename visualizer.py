@@ -97,6 +97,50 @@ class FleetVisualizer:
             barmode='group'
         )
 
+        # Battery Capacity Comparison
+        fig_capacity = go.Figure()
+        for vehicle in self.vehicles:
+            metrics = vehicle.get_latest_metrics()
+            health = metrics.battery_health
+            fig_capacity.add_trace(
+                go.Bar(
+                    name=vehicle.display_name,
+                    x=['Current', 'Original'],
+                    y=[health.capacity, health.original_capacity],
+                    text=[f"{health.capacity:.1f} kWh", f"{health.original_capacity:.1f} kWh"],
+                    textposition='auto',
+                )
+            )
+        fig_capacity.update_layout(
+            title="Battery Capacity Comparison",
+            yaxis_title="Capacity (kWh)",
+            barmode='group'
+        )
+
+        # Range vs Odometer Scatter
+        fig_range = go.Figure()
+        fig_range.add_trace(
+            go.Scatter(
+                x=[v.get_latest_metrics().odometer for v in self.vehicles],
+                y=[v.get_latest_metrics().battery_health.max_range for v in self.vehicles],
+                mode='markers+text',
+                text=[v.display_name for v in self.vehicles],
+                textposition="top center",
+                marker=dict(
+                    size=12,
+                    color=[v.get_latest_metrics().battery_health.health_percent for v in self.vehicles],
+                    colorscale='Viridis',
+                    showscale=True,
+                    colorbar=dict(title="Health %")
+                )
+            )
+        )
+        fig_range.update_layout(
+            title="Maximum Range vs Odometer",
+            xaxis_title="Odometer (miles)",
+            yaxis_title="Maximum Range (miles)"
+        )
+
         # Export to HTML
         with open(output_file, 'w') as f:
             f.write("""
