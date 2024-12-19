@@ -97,6 +97,9 @@ python main.py
 - Add `key.py` to your `.gitignore` file
 - Use proper API key management in production environments
 
+## Presentation
+- A link to the presentation. https://vimeo.com/1040597230
+
 ## Acknowledgments
-- Built using the [Tessie API](https://tessie.com/)
+- Built using the [Tessie API](https://tessie.com/) 
 - Visualization powered by [Plotly](https://plotly.com/)
